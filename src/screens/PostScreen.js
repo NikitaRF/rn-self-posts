@@ -4,7 +4,7 @@ import {View, StyleSheet, Text} from "react-native";
 export const PostScreen = ({}) => {
     return (
         <View style={styles.center}>
-            <Text>MainScreen</Text>
+            <Text>PostScreen</Text>
         </View>
     )
 }

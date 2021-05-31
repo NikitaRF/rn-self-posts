@@ -1,11 +1,18 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { View, StyleSheet, Text, Image, Button, ScrollView, Alert } from "react-native";
 import { DATA } from "../data";
 import { THEME } from '../theme'
+import {HeaderButtons, Item} from "react-navigation-header-buttons";
+import {AppHeaderIcon} from "../components/AppHeaderIcon";
 
 export const PostScreen = ({navigation}) => {
     const postId = navigation.getParam('postId')
     const post = DATA.find( p => p.id === postId)
+
+    // useEffect(() => {
+    //     navigation.setParams({ booked: post.booked })
+    // }, [])
+
     const removeHandler = () => {
         Alert.alert(
             "Удаление поста",
@@ -37,8 +44,19 @@ export const PostScreen = ({navigation}) => {
 
 PostScreen.navigationOptions = ({navigation}) => {
     const postDate = navigation.getParam('date')
+
+    const booked = navigation.getParam('booked')
+    const iconName = booked ? 'ios-star' : 'ios-star-outline'
+
     return {
-        headerTitle: 'Пост ' + new Date(postDate).toLocaleDateString()
+        headerTitle: 'Пост ' + new Date(postDate).toLocaleDateString(),
+        headerRight: (
+            <HeaderButtons HeaderButtonComponent={AppHeaderIcon} >
+                <Item title='Booked'
+                      iconName={iconName}
+                      onPress={() => console.log('Booked add')}/>
+            </HeaderButtons>
+        ),
     }
 }
 

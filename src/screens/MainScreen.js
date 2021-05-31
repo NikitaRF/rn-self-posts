@@ -22,23 +22,23 @@ export const MainScreen = ({ navigation }) => {
     )
 }
 
-MainScreen.navigationOptions = {
+MainScreen.navigationOptions = ({ navigation }) => ({
     headerTitle: 'Мой блог',
     headerRight: (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon} >
         <Item title='Take Photo'
               iconName='ios-camera'
-              onPress={() => console.log('Press photo')}/>
+              onPress={() => navigation.push('Create')}/>
         </HeaderButtons>
         ),
     headerLeft: (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon} >
         <Item title='Menu'
               iconName='ios-menu'
-              onPress={() => console.log('Press menu')}/>
+              onPress={() => navigation.toggleDrawer()}/>
         </HeaderButtons>
         ),
-}
+})
 
 const styles = StyleSheet.create({
     wrapper: {

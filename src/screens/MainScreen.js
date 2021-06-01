@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppHeaderIcon } from "../components/AppHeaderIcon";
 import { HeaderButtons, Item} from "react-navigation-header-buttons";
 import {loadPosts} from "../store/actions/post";
+import {THEME} from "../theme";
 
 
 
@@ -27,6 +28,14 @@ export const MainScreen = ({ navigation }) => {
 
     // с помощью useSelector мы получаем состояние
     const allPosts = useSelector(state => state.post.allPosts)
+
+    if (allPosts.length === 0){
+        return (
+            <View style={styles.noItemWrapper}>
+                 <Text style={styles.noItemText}>Пока нет ни одного поста</Text>
+            </View>
+        )
+    }
 
     return (
         <View style={styles.wrapper}>
@@ -60,5 +69,17 @@ MainScreen.navigationOptions = ({ navigation }) => ({
 const styles = StyleSheet.create({
     wrapper: {
         padding: 10,
+    },
+    noItemWrapper: {
+        flex: 1,
+        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    noItemText: {
+        fontFamily: 'open-regular',
+        textAlign: 'center',
+        color: THEME.MAIN_COLOR,
+        fontSize: 18
     },
 })

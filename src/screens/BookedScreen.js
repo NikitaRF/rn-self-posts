@@ -4,6 +4,7 @@ import {View, StyleSheet, Text, Button, FlatList} from "react-native";
 import { Post } from "../components/Post";
 import { AppHeaderIcon } from "../components/AppHeaderIcon";
 import { HeaderButtons, Item} from "react-navigation-header-buttons";
+import {THEME} from "../theme";
 
 
 export const BookedScreen = ({ navigation }) => {
@@ -13,6 +14,14 @@ export const BookedScreen = ({ navigation }) => {
     }
 
     const bookedPosts = useSelector(state => state.post.bookedPosts)
+
+    if (bookedPosts.length === 0){
+        return (
+            <View style={styles.noItemWrapper}>
+                <Text style={styles.noItemText}>Пока нет ни одного поста</Text>
+            </View>
+        )
+    }
 
     return (
         <View style={styles.wrapper}>
@@ -39,5 +48,17 @@ BookedScreen.navigationOptions = ({navigation}) => ({
 const styles = StyleSheet.create({
     wrapper: {
         padding: 10,
+    },
+    noItemWrapper: {
+        flex: 1,
+        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    noItemText: {
+        fontFamily: 'open-regular',
+        textAlign: 'center',
+        color: THEME.MAIN_COLOR,
+        fontSize: 18
     },
 })

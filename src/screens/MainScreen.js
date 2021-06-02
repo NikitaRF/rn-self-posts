@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {View, StyleSheet, Text, Button, FlatList} from "react-native";
+import {View, StyleSheet, Text, Button, FlatList, ActivityIndicator} from "react-native";
 import { Post } from "../components/Post";
 import { useDispatch, useSelector } from "react-redux";
 import { AppHeaderIcon } from "../components/AppHeaderIcon";
@@ -28,6 +28,15 @@ export const MainScreen = ({ navigation }) => {
 
     // с помощью useSelector мы получаем состояние
     const allPosts = useSelector(state => state.post.allPosts)
+    const loading = useSelector( state => state.post.loading)
+
+    if (loading) {
+        return (
+            <View style={styles.center}>
+                <ActivityIndicator color={THEME.MAIN_COLOR}/>
+            </View>
+        )
+    }
 
     if (allPosts.length === 0){
         return (
@@ -82,4 +91,9 @@ const styles = StyleSheet.create({
         color: THEME.MAIN_COLOR,
         fontSize: 18
     },
+    center: {
+        flex: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 })
